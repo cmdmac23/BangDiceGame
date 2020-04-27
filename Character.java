@@ -4,26 +4,33 @@
  */
 package bangdicegame;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 /**
- *
- * 
+ *Changes made by SAS:
+ *included isAi boolean in attributes and constructor
+ *included shotSheriff
+ *included helpedSheriff
+ *gave each player a ProbabilityVector attribute (arraylist)
  */
 
 public class Character {
     public int lifePoints, arrows, maxLife, numShotSheriff, numHelpSheriff;
-    public String name, role;
+    public String name, role, aiGuessRole;
+    public boolean isAi;
+    public ArrayList<Double> ProbabilityVector;
     
-    
-    public Character(int selection){
+    public Character(int selection, boolean isAI){
         this.arrows = 0;
         this.role = "";
-        //NEW CODE
+        this.isAi = isAI;
         this.numShotSheriff = 0;
         this.numHelpSheriff = 0;
-        
+        this.ProbabilityVector =  new ArrayList<Double>();
+        this.ProbabilityVector.addAll(Arrays.asList(0.0,0.0,0.0,0.0));
         
         switch (selection){
             case 1:
@@ -108,6 +115,10 @@ public class Character {
        }
     }
     
+    public void setname(String name) {
+    	this.name = name;
+    }
+    
     public static int [] shuffle_character (int [] randomSelection){
         Random rand = new Random();
         int random;
@@ -124,9 +135,6 @@ public class Character {
     public static String [] shuffle_roles (String [] roles, int num){
         Random rand = new Random();
         int random;
-        
-        
-        
         for (int i = 0; i <= num; i++){
             random = rand.nextInt(num);
             String temp1 = roles[random];
@@ -189,12 +197,22 @@ public class Character {
         }
     }
     
-    public void lose_life (GameFunctions playerOrder, ArrowPile arrowPile, Boolean arrowOrDynamite){
+    //for ai
+    public void lose_life() {
+    	this.lifePoints --;
+    }
+    
+    //for ai
+    public void lose_life(int numArrows) {
+    	this.lifePoints = this.lifePoints - numArrows;
+    }
+    
+    public void lose_life(GameFunctions playerOrder, ArrowPile arrowPile, Boolean arrowOrDynamite){
         String choice;
         
         Scanner input = new Scanner(System.in);
         
-        if ("Bart Cassidy".equals(this.name) && !arrowOrDynamite){
+        if ("Bart Cassidy".equals(this.name) && !arrowOrDynamite && !this.isAi){
             if (arrowPile.remaining > 1){
                 System.out.print("Bart Cassidy, would you like to lose a 'life point' or take an 'arrow'? : ");
                 choice = input.nextLine();
@@ -233,4 +251,6 @@ public class Character {
             playerOrder.eliminate_player(this, arrowPile, !arrowOrDynamite);
         }
     }
+    
+  
 }
