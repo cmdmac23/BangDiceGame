@@ -35,7 +35,7 @@ public class ArrowPile {
             }
             
             if (decision == 'y' || decision == 'Y'){
-                System.out.println("You have taken the cheif's arrow.");
+                System.out.println("You have taken the chief's arrow.");
                 game.get_current_player().gain_arrow();
                 game.get_current_player().gain_arrow();
                 game.get_current_player().cheifArrow = true;
@@ -123,7 +123,7 @@ public class ArrowPile {
         }
         
         if (game.playerOrder[mostArrowsPosition].cheifArrow == true){
-            System.out.println(game.playerOrder[mostArrowsPosition].name + " had the most arrows and the cheif's arrow, so they will take no damage.");
+            System.out.println(game.playerOrder[mostArrowsPosition].name + " had the most arrows and the chief's arrow, so they will take no damage.");
             game.playerOrder[mostArrowsPosition].arrows = 0;
         }
         

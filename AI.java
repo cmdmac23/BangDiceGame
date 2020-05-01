@@ -725,7 +725,7 @@ public class AI {
 			if (diceResults.get(i)=="A" && !this.game.game_over) {
                             //NEW CODE
                             if (game.get_current_player().arrows >= 3 && this.arrowPile.chiefArrow != 0){
-                                System.out.println(this.name + "rolled an arrow and has taken the cheif's arrow.");
+                                System.out.println(this.name + "rolled an arrow and has taken the chief's arrow.");
                                 game.get_current_player().gain_arrow();
                                 game.get_current_player().gain_arrow();
                                 game.get_current_player().cheifArrow = true;
